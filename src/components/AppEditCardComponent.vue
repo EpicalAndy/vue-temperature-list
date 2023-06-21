@@ -15,10 +15,10 @@
     </div>
 
     <div class="field">
-      <button @click.prevent="updateCard"
-              class="btn">
+      <app-button-component @click.prevent="updateCard"
+                            color="green">
         Добавить
-      </button>
+      </app-button-component>
     </div>
   </div>
 
@@ -29,6 +29,7 @@
 
 import { ref, Ref } from "vue";
 import { useCardStore } from "@/stores/catd_store";
+import AppButtonComponent from "@/components/UI/AppButtonComponent.vue";
 
 const name: Ref<string> = ref('');
 const value: Ref<string> = ref('');
@@ -66,27 +67,6 @@ function updateCard(ev: Event) {
 
 .field input {
 
-}
-
-.field .btn {
-  background-color: #4CAF50; /* Green */
-  border: none;
-  color: white;
-  padding: 0.5em;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-}
-
-.field .btn {
-  -webkit-transition-duration: 0.4s; /* Safari */
-  transition-duration: 0.4s;
-}
-
-.field .btn:hover {
-  background-color: #3d8c40; /* Green */
-  color: white;
 }
 
 .field .editor[type=text] {
