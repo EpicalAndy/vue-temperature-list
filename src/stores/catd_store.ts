@@ -24,9 +24,13 @@ export const useCardStore = defineStore('card', () => {
     return cards.value.find(item => item.id === id);
   }
 
+  function updateCard(card: Card) {
+    Object.assign(getCard(card.id), card);
+  }
+
   function getNextId() {
     return id++;
   }
 
-  return { cards, cardsByDate, addCard, removeCard, getCard };
+  return { cards, cardsByDate, addCard, removeCard, getCard, updateCard };
 })

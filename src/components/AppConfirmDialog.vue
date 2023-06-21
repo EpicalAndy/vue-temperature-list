@@ -1,6 +1,5 @@
 <template>
-  <app-dialog-component :show="true">
-
+  <app-dialog-component :show="show">
     <div class="confirm-dialog">
       <div class="confirm-header confirm-item">
         <h3 class="confirm-title">{{ text.confirm.title }}</h3>
@@ -27,7 +26,9 @@
 <script setup lang="ts">
 import AppButtonComponent from "@/components/UI/AppButtonComponent.vue";
 import AppDialogComponent from "@/components/UI/AppDialogComponent.vue";
+import { ref } from "vue";
 
+const show = ref(false);
 const text = {
   cancel: {
     title: 'Отмена изменений', description: 'Отменить изменения?'
@@ -40,10 +41,18 @@ const emits = defineEmits([ 'confirm', 'cancel' ]);
 
 function confirm() {
   emits('confirm');
+
+  closeDialog()
 }
 
 function cancel() {
   emits('cancel');
+
+  closeDialog()
+}
+
+function closeDialog() {
+  show.value = false;
 }
 </script>
 

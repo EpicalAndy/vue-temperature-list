@@ -15,7 +15,6 @@ const _show = computed(() => props.show);
 const dialog = ref(null);
 
 onMounted(() => {
-  debugger
   _show.value === true ? openDialog() : closeDialog();
 });
 

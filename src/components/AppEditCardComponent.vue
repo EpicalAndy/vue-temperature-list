@@ -17,7 +17,7 @@
     <div class="field">
       <app-button-component @click.prevent="updateCard"
                             color="green">
-        Добавить
+        {{ cardId !== null ? 'Редактировать' : 'Добавить' }}
       </app-button-component>
     </div>
   </div>
@@ -30,12 +30,27 @@
 import { ref, Ref } from "vue";
 import { useCardStore } from "@/stores/catd_store";
 import AppButtonComponent from "@/components/UI/AppButtonComponent.vue";
+import { useRoute } from "vue-router";
 
-const name: Ref<string> = ref('');
-const value: Ref<string> = ref('');
 const cardStore = useCardStore();
+const route = useRoute();
+const cardId = route.params.id ? +route.params.id : null;
+const cardData = cardId !== null && cardStore.getCard(cardId);
+
+const name: Ref<string> = ref(cardData ? cardData.name : '');
+const value: Ref<string> = ref(cardData ? cardData.value : '');
 
 function updateCard(ev: Event) {
+  if (cardId === null) {
+    addCard();
+
+    return;
+  }
+
+  _updateCard();
+}
+
+function addCard() {
   cardStore.addCard({
     id: null,
     name: name.value,
@@ -45,6 +60,13 @@ function updateCard(ev: Event) {
 
   name.value = '';
   value.value = '';
+}
+
+function _updateCard() {
+  cardData.name = name.value;
+  cardData.value = value.value;
+
+  cardData && cardStore.updateCard(cardData);
 }
 </script>
 

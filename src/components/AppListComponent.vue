@@ -13,7 +13,7 @@
       <td>{{ card.value }}</td>
       <td>
         <app-button-component color="green"
-                              @click="showEditDialog = true">
+                              @click="editCard(card.id)">
           <span v-html="'&#128394;'"></span>
         </app-button-component>
         <span>&nbsp;</span>
@@ -33,9 +33,14 @@ import AppButtonComponent from "@/components/UI/AppButtonComponent.vue";
 import { ref } from "vue";
 import AppDialogComponent from "@/components/UI/AppDialogComponent.vue";
 import AppConfirmDialog from "@/components/AppConfirmDialog.vue";
+import router from "@/router";
 
 const cardsStore = useCardStore();
 const showEditDialog = ref(false);
+
+function editCard(id: number) {
+  router.push({ path: `/edit/${id}` })
+}
 </script>
 
 <style scoped>
