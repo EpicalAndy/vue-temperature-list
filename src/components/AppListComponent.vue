@@ -24,9 +24,7 @@
     </tr>
     </tbody>
   </table>
-  <app-dialog-component :show="showEditDialog">
-    <span>Dialog!</span>
-  </app-dialog-component>
+  <app-confirm-dialog></app-confirm-dialog>
 </template>
 
 <script setup lang="ts">
@@ -34,6 +32,7 @@ import { useCardStore } from "@/stores/catd_store";
 import AppButtonComponent from "@/components/UI/AppButtonComponent.vue";
 import { ref } from "vue";
 import AppDialogComponent from "@/components/UI/AppDialogComponent.vue";
+import AppConfirmDialog from "@/components/AppConfirmDialog.vue";
 
 const cardsStore = useCardStore();
 const showEditDialog = ref(false);

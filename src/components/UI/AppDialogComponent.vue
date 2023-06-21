@@ -15,11 +15,12 @@ const _show = computed(() => props.show);
 const dialog = ref(null);
 
 onMounted(() => {
-
+  debugger
+  _show.value === true ? openDialog() : closeDialog();
 });
 
 watch(_show, () => {
-  _show ? openDialog() : closeDialog();
+  _show.value === true ? openDialog() : closeDialog();
 })
 
 function openDialog() {
@@ -27,7 +28,6 @@ function openDialog() {
 }
 
 function closeDialog() {
-  debugger
   dialog.value && dialog.value?.close();
 }
 </script>
