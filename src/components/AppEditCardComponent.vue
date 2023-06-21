@@ -2,16 +2,23 @@
   <div class="form">
     <div class="field">
       <label for="name">Название:</label>
-      <input type="text" v-model="name">
+      <input type="text"
+             class="editor"
+             v-model="name">
     </div>
 
     <div class="field">
       <label for="value">Измерение:</label>
-      <input type="text" v-model="value">
+      <input type="text"
+             class="editor"
+             v-model="value">
     </div>
 
     <div class="field">
-      <button @click.prevent="updateCard">Добавить</button>
+      <button @click.prevent="updateCard"
+              class="btn">
+        Добавить
+      </button>
     </div>
   </div>
 
@@ -45,8 +52,12 @@ function updateCard(ev: Event) {
   width: 100%;
   display: flex;
   flex-direction: row;
-  align-items: start;
+  align-items: center;
   justify-content: space-between;
+}
+
+.field + .field {
+  margin-top: 1em;
 }
 
 .field label {
@@ -55,5 +66,40 @@ function updateCard(ev: Event) {
 
 .field input {
 
+}
+
+.field .btn {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 0.5em;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.field .btn {
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+}
+
+.field .btn:hover {
+  background-color: #3d8c40; /* Green */
+  color: white;
+}
+
+.field .editor[type=text] {
+  min-width: 5em;
+  padding: 0.2em;
+  box-sizing: border-box;
+  border: 3px solid #ccc;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
+}
+
+.field .editor[type=text]:focus {
+  border: 3px solid #555;
 }
 </style>
