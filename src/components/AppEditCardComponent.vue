@@ -17,11 +17,10 @@
     <div class="field">
       <app-button-component @click.prevent="updateCard"
                             color="green">
-        {{ cardId !== null ? 'Редактировать' : 'Добавить' }}
+        {{ cardId !== null ? 'Обновить' : 'Добавить' }}
       </app-button-component>
     </div>
   </div>
-
 
 </template>
 
@@ -39,6 +38,8 @@ const cardData = cardId !== null && cardStore.getCard(cardId);
 
 const name: Ref<string> = ref(cardData ? cardData.name : '');
 const value: Ref<string> = ref(cardData ? cardData.value : '');
+const showStatus = ref(false);
+const statusText = ref('');
 
 function updateCard(ev: Event) {
   if (cardId === null) {
@@ -63,10 +64,25 @@ function addCard() {
 }
 
 function _updateCard() {
-  cardData.name = name.value;
-  cardData.value = value.value;
+  try {
+    if (!cardData) {
+      return;
+    }
+    cardData.name = name.value;
+    cardData.value = value.value;
 
-  cardData && cardStore.updateCard(cardData);
+    cardStore.updateCard(cardData);
+
+  } catch (err) {
+
+  }
+
+}
+
+function actionComplete() {
+  showStatus.value === true;
+
+
 }
 </script>
 

@@ -17,7 +17,8 @@
           <span v-html="'&#128394;'"></span>
         </app-button-component>
         <span>&nbsp;</span>
-        <app-button-component color="red">
+        <app-button-component color="red"
+        @click="deleteCard(card.id)">
           <span v-html="'&#128465;'"></span>
         </app-button-component>
       </td>
@@ -40,6 +41,10 @@ const showEditDialog = ref(false);
 
 function editCard(id: number) {
   router.push({ path: `/edit/${id}` })
+}
+
+function deleteCard(id: number) {
+  cardsStore.removeCard(id);
 }
 </script>
 
