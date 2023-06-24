@@ -5,9 +5,13 @@ import { computed, reactive, ref } from "vue";
 export const useCardStore = defineStore('card', () => {
   const cards = ref([] as Card[]);
 
+
   let id = 0;
 
-  const cardsByDate = computed(() => cards.value.sort((a, b)=> a.date - b.date));
+  const cardsByDate = computed(() => cards.value.sort((a, b) => {
+    return b.date - a.date;
+  }));
+
   function addCard(card: Card) {
     card.id = getNextId();
 
@@ -20,8 +24,8 @@ export const useCardStore = defineStore('card', () => {
     cards.value.splice(index, 1);
   }
 
-  function getCard(id: number) {
-    return cards.value.find(item => item.id === id);
+  function getCard(id: number): Card {
+    return cards.value.find(item => item.id === id) as Card;
   }
 
   function updateCard(card: Card) {
@@ -32,5 +36,5 @@ export const useCardStore = defineStore('card', () => {
     return id++;
   }
 
-  return { cards, cardsByDate, addCard, removeCard, getCard, updateCard };
-})
+  return { cards, cardsByDate, addCard, removeCard, getCard, updateCard, };
+}, {persist: true})
