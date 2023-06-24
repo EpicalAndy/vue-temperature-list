@@ -17,7 +17,7 @@
     <div class="field">
       <app-button-component @click.prevent="updateCard"
                             color="green">
-        {{ cardId !== null ? 'Обновить' : 'Добавить' }}
+        {{ cardId !== null ? 'Применить' : 'Добавить' }}
       </app-button-component>
     </div>
   </div>

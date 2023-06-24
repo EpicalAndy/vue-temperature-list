@@ -1,25 +1,30 @@
 <template>
   <app-dialog-component :show="show">
     <div class="confirm-dialog">
+
       <div class="confirm-header confirm-item">
-        <h3 class="confirm-title">{{ text.confirm.title }}</h3>
+        <h3 class="confirm-title">
+          <slot name="title"></slot>
+        </h3>
         <a href="#close" title="Close" class="close">×</a>
       </div>
+
       <div class="confirm-body confirm-item">
-        <p>{{ text.confirm.description }}</p>
+        <slot name="body"></slot>
       </div>
+
       <div class="confirm-footer confirm-item">
         <app-button-component color="green"
-                              @click="confirm">
+                              @click="confirmAction">
           Подтвердить
         </app-button-component>
         <app-button-component color="red"
-                              @click="cancel">
+                              @click="cancelAction">
           Отменить
         </app-button-component>
       </div>
-    </div>
 
+    </div>
   </app-dialog-component>
 </template>
 
@@ -29,31 +34,17 @@ import AppDialogComponent from "@/components/UI/AppDialogComponent.vue";
 import { ref } from "vue";
 
 const show = ref(false);
-const text = {
-  cancel: {
-    title: 'Отмена изменений', description: 'Отменить изменения?'
-  },
-  confirm: {
-    title: 'Сохранить изменения', description: 'Сохранить внесённые изменения?'
-  }
-}
-const emits = defineEmits([ 'confirm', 'cancel' ]);
+const emits = defineEmits([ 'confirm-action', 'cancel-action' ]);
 
-function confirm() {
-  emits('confirm');
 
-  closeDialog()
+function confirmAction() {
+  emits('confirm-action');
 }
 
-function cancel() {
-  emits('cancel');
-
-  closeDialog()
+function cancelAction() {
+  emits('cancel-action');
 }
 
-function closeDialog() {
-  show.value = false;
-}
 </script>
 
 <style scoped>
