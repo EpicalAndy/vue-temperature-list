@@ -1,10 +1,11 @@
 <template>
   <div class="form">
     <div class="field">
-      <label for="name">Название:</label>
+      <label for="name">ID:</label>
       <input type="text"
              class="editor"
-             v-model="name">
+             disabled
+             :value="id">
     </div>
 
     <div class="field">
@@ -36,7 +37,7 @@ const route = useRoute();
 const cardId = route.params.id ? +route.params.id : null;
 const cardData = cardId !== null && cardStore.getCard(cardId);
 
-const name: Ref<string> = ref(cardData ? cardData.name : '');
+const id = cardData ? cardData.id : '';
 const value: Ref<string> = ref(cardData ? cardData.value : '');
 const showStatus = ref(false);
 const statusText = ref('');
@@ -54,12 +55,12 @@ function updateCard(ev: Event) {
 function addCard() {
   cardStore.addCard({
     id: null,
-    name: name.value,
+    name: '',
     value: value.value,
     date: (new Date()).getMilliseconds()
   });
 
-  name.value = '';
+
   value.value = '';
 }
 
@@ -68,7 +69,6 @@ function _updateCard() {
     if (!cardData) {
       return;
     }
-    cardData.name = name.value;
     cardData.value = value.value;
 
     cardStore.updateCard(cardData);

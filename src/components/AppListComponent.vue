@@ -10,7 +10,7 @@
       </thead>
       <tbody>
       <tr v-for="card in cardsStore.cards">
-        <td>{{ card.name }}</td>
+        <td>{{ card.id }}</td>
         <td>{{ card.value }}</td>
         <td>
           <app-button-component color="green"
