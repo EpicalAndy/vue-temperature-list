@@ -12,7 +12,7 @@ import { useCardStore } from "@/stores/catd_store";
 
 const route = useRoute();
 const cardsStore = useCardStore();
-const cardId = route.params.id ? +route.params.id : null;
+const cardId: number | null = route.params.id ? +route.params.id : null;
 function hasCard(): boolean {
   return !!(cardId !== null && cardsStore.getCard(cardId));
 }

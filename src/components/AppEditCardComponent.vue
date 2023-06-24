@@ -31,16 +31,16 @@ import { ref, Ref } from "vue";
 import { useCardStore } from "@/stores/catd_store";
 import AppButtonComponent from "@/components/UI/AppButtonComponent.vue";
 import { useRoute } from "vue-router";
+import { Card } from "@/models/card";
 
 const cardStore = useCardStore();
 const route = useRoute();
-const cardId = route.params.id ? +route.params.id : null;
-const cardData = cardId !== null && cardStore.getCard(cardId);
+const cardId: number | null = route.params.id ? +route.params.id : null;
+const cardData: Card | null = cardId !== null ? cardStore.getCard(cardId) : null;
 
-const id = cardData ? cardData.id : '';
+const id: string = cardData ? cardData.id + '' : '';
 const value: Ref<string> = ref(cardData ? cardData.value : '');
-const showStatus = ref(false);
-const statusText = ref('');
+const showStatus: Ref<boolean> = ref(false);
 
 function updateCard(ev: Event) {
   if (cardId === null) {
@@ -54,12 +54,11 @@ function updateCard(ev: Event) {
 
 function addCard() {
   cardStore.addCard({
-    id: null,
+    id: -1,
     name: '',
     value: value.value,
-    date: (new Date()).getMilliseconds()
+    date: (new Date()).getTime()
   });
-
 
   value.value = '';
 }
@@ -76,14 +75,8 @@ function _updateCard() {
   } catch (err) {
 
   }
-
 }
 
-function actionComplete() {
-  showStatus.value === true;
-
-
-}
 </script>
 
 <style scoped>

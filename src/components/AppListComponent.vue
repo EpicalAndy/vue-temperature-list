@@ -9,7 +9,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr v-for="card in cardsStore.cards">
+      <tr v-for="card in cardsStore.cardsByDate">
         <td>{{ card.id }}</td>
         <td>{{ card.value }}</td>
         <td>
